@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        #main {
+            width: 100%;
+            height: 100vh;
+            background-color: #111;
+        }
+        #cursor {
+            width: 20px;
+            height: 20px;
+            background-color: white;
+            border-radius: 50%;
+            position: fixed;
+        }
+    </style>
+</head>
+<body>
+            <div id="cursor"></div>
+    <div id="main">
+
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
+    <script>
+        let main = document.querySelector("#main")
+        let cursor = document.querySelector("#cursor")
+
+        main.addEventListener("mousemove", function(dets) {
+            gsap.to("#cursor", {
+                x: dets.x,
+                y: dets.y
+            })
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body,html {
+            height: 100%;
+            width: 100%;
+        }
+        body {
+            overflow-x: hidden;
+        }
+        li {
+            list-style: none;
+        }
+        .section-1 {
+            width: 100%;
+            height: 100%;
+            background-color: #52eba9;
+        }
+        .section-2 {
+            width: 100%;
+            height: 100%;
+            background-color: #5996dc;
+            display: flex;
+            align-items: center;
+            justify-self: start;
+        }
+        .section-1 h1 {
+            font-size: 38vw;
+            text-transform: uppercase;
+        }
+        .section-2 ul {
+            display: flex;
+            gap: 4rem;
+        }
+        .section-2 ul li img {
+            width: auto;
+            max-height: 500px;
+        }
+        .section-3 {
+            width: 100%;
+            height: 100%;
+            background-color: #2cc93c;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .section-4 {
+            width: 100%;
+            height: 100%;
+            background-color: #391cb0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .section-3 ul {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: space-between;
+        }
+        .section-3 ul img {
+            width: auto;
+            max-height: 400px;
+        }
+        .section-4 ul {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: space-between;
+        }
+        .section-4 ul img {
+            width: auto;
+            max-height: 400px;
+        }
+    </style>
+</head>
+<body>
+    <div class="section-1">
+        <h1>Experience</h1>
+    </div>
+    <div class="section-2">
+         <ul>
+            <li>
+                <img src="https://viewegh.ccus-dev.com/wp-content/uploads/2026/01/about-testimonials-1.png" alt="">
+            </li>
+            <li>
+                <img src="https://viewegh.ccus-dev.com/wp-content/uploads/2026/01/about-testimonials-1.png" alt="">
+            </li>
+            <li>
+                <img src="https://viewegh.ccus-dev.com/wp-content/uploads/2026/01/about-testimonials-1.png" alt="">
+            </li>
+            <li>
+                <img src="https://viewegh.ccus-dev.com/wp-content/uploads/2026/01/about-testimonials-1.png" alt="">
+            </li>
+            <li>
+                <img src="https://viewegh.ccus-dev.com/wp-content/uploads/2026/01/about-testimonials-1.png" alt="">
+            </li>
+            <li>
+                <img src="https://viewegh.ccus-dev.com/wp-content/uploads/2026/01/about-testimonials-1.png" alt="">
+            </li>
+            <li>
+                <img src="https://viewegh.ccus-dev.com/wp-content/uploads/2026/01/about-testimonials-1.png" alt="">
+            </li>
+            <li>
+                <img src="https://viewegh.ccus-dev.com/wp-content/uploads/2026/01/about-testimonials-1.png" alt="">
+            </li>
+         </ul>
+    </div>
+    <div class="section-3">
+        <ul>
+            <li>
+                <img src="https://viewegh.ccus-dev.com/wp-content/uploads/2026/01/about-testimonials-1.png" alt="">
+            </li>
+            <li>
+                <img src="https://viewegh.ccus-dev.com/wp-content/uploads/2026/01/about-testimonials-1.png" alt="">
+            </li>
+         </ul>
+    </div>
+    <div class="section-4">
+        <ul>
+            <li class="left">
+                <img src="https://viewegh.ccus-dev.com/wp-content/uploads/2026/01/about-testimonials-1.png" alt="">
+            </li>
+            <li class="right">
+                <img src="https://viewegh.ccus-dev.com/wp-content/uploads/2026/01/about-testimonials-1.png" alt="">
+            </li>
+         </ul>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"></script>
+    <script>
+        gsap.to(".section-1 h1", {
+            transform: "translateX(-150%)",
+            scrollTrigger: {
+                trigger: ".section-1",
+                scroller: "body",
+                // markers: true,
+                scrub: 2,
+                pin: true,
+                start: "top 0%",
+                end: "top -150%"
+            }
+        })
+    </script>
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        const list = document.querySelector(".section-2 ul");
+
+        gsap.to(list, {
+        x: () => -(list.scrollWidth - window.innerWidth),
+        ease: "none",
+        scrollTrigger: {
+            trigger: ".section-2",
+            start: "top top",
+            end: () => "+=" + list.scrollWidth,
+            scrub: 1,
+            pin: true,
+            anticipatePin: 1
+            // markers: true
+        }
+        });
+    </script>
+    <script>
+        gsap.to(".section-3", {
+            // transform: "translateX(-150%)",
+            scrollTrigger: {
+                trigger: ".section-3",
+                scroller: "body",
+                // markers: true,
+                scrub: 2,
+                pin: true,
+            }
+        })
+    </script>
+    <script>
+        gsap.from(".section-3 ul li", {
+        opacity: 0,
+        duration: 3,
+        delay: 1,
+        scale: 0,
+        rotate: 360,
+        scrollTrigger: ".section-3 ul li"
+    })
+    </script>
+    <script>
+        gsap.to(".section-4", {
+            // transform: "translateX(-150%)",
+            scrollTrigger: {
+                trigger: ".section-4",
+                scroller: "body",
+                // markers: true,
+                scrub: 2,
+                pin: true,
+            }
+        })
+    </script>
+    <script>
+        gsap.from(".section-4 ul .left", {
+        opacity: 0,
+        duration: 3,
+        delay: 0.3,
+        x: 1200,
+        y: 1000,
+        scrollTrigger: ".section-4 ul .left"
+    })
+    </script>
+    <script>
+        gsap.from(".section-4 ul .right", {
+        opacity: 0,
+        duration: 3,
+        delay: 0.3,
+        x: -1200,
+        y: 1000,
+        scrollTrigger: ".section-4 ul .left"
+    })
+    </script>
+
+</body>
+</html>

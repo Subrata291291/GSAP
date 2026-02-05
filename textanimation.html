@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            overflow-x: hidden;
+            background-color: #111;
+        }
+         li {
+            list-style: none;
+         }
+         .main {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100vh;
+         }
+         .main h1{
+            color: #fff;
+            font-size: 80px;
+            text-transform: uppercase;
+            overflow: hidden;
+         }
+         .main h1 span {
+            display: inline-block;
+         }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <h1>Hello World</h1>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
+    <script>
+        function breakText() {
+            let heading = document.querySelector(".main h1");
+            let text = heading.textContent;                  
+
+            let splitText = text.split("");
+
+            let clutter = "";
+            splitText.forEach(function (char) {
+                clutter += `<span>${char}</span>`;
+            });
+
+            heading.innerHTML = clutter;
+        }
+        breakText()
+    </script>
+    <script>
+        gsap.from(".main h1 span", {
+            y: 70,
+            duration: 0.8,
+            delay: 0.5,
+            opacity: 0,
+            // stagger: -0.15, for right to left
+            stagger: 0.15
+        })
+    </script>
+</body>
+</html>
