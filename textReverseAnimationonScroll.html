@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            width: 100%;
+            height: 100vh;
+            background-color: #111;
+        }
+        .marquee {
+            display: flex;
+            align-items: center;
+            flex-shrink: 0;
+        }
+        .marquee i {
+            vertical-align: middle;
+            display: inline-block;
+            rotate: 180deg;
+        }
+        #move {
+            display: flex;
+            justify-content: space-between;
+            gap: 50px;
+            background-color: yellow;
+            padding: 30px;
+            overflow: hidden;
+        }
+        .marquee h1 {
+            font-size: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div id="page-1"></div>
+    <div id="page-2">
+        <div id="move">
+            <div class="marquee">
+                <h1>Thive beyond limit <span><i class="ri-arrow-right-line"></i></span></h1>
+            </div>
+            <div class="marquee">
+                <h1>Thive beyond limit <span><i class="ri-arrow-right-line"></i></span></h1>
+            </div>
+            <div class="marquee">
+                <h1>Thive beyond limit <span><i class="ri-arrow-right-line"></i></span></h1>
+            </div>
+            <div class="marquee">
+                <h1>Thive beyond limit <span><i class="ri-arrow-right-line"></i></span></h1>
+            </div>
+            <div class="marquee">
+                <h1>Thive beyond limit <span><i class="ri-arrow-right-line"></i></span></h1>
+            </div>
+            <div class="marquee">
+                <h1>Thive beyond limit <span><i class="ri-arrow-right-line"></i></span></h1>
+            </div>
+        </div>
+    </div>
+    <div id="page-3"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"></script>
+    <script>
+    const marqueeTween = gsap.to(".marquee", {
+        x: "-300%",
+        duration: 8,
+        ease: "none",
+        repeat: -1
+    });
+
+    let direction = 1;
+
+    window.addEventListener("wheel", function (e) {
+
+        if (e.deltaY > 0) {
+            marqueeTween.timeScale(1);
+
+            if (direction !== 1) {
+                direction = 1;
+
+                gsap.to(".marquee i", {
+                    rotation: 180,
+                    duration: 0.4,
+                    ease: "power2.out"
+                });
+            }
+
+        } else {
+            marqueeTween.timeScale(-1);
+
+            if (direction !== -1) {
+                direction = -1;
+
+                gsap.to(".marquee i", {
+                    rotation: 0,
+                    duration: 0.4,
+                    ease: "power2.out"
+                });
+            }
+        }
+    });
+</script>
+
+
+
+</body>
+</html>
