@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GSAP Scroll Project</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family: Arial, sans-serif;
+}
+
+.space{
+  height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:40px;
+  background:#f5f5f5;
+}
+
+.gallery{
+  display:flex;
+  min-height:100vh;
+  padding:80px;
+  gap:80px;
+  align-items: center;
+}
+
+.left{
+  flex:1;
+  position:relative;
+  /* height:500px; */
+  align-items: center;
+  display: flex;
+}
+
+.details{
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  opacity:0;
+}
+
+.details h1{
+  font-size:40px;
+  margin-bottom:20px;
+}
+
+.details p{
+  max-width:400px;
+  line-height:1.6;
+}
+
+.right{
+  flex:1;
+  position:relative;
+  height:500px;
+}
+
+.photo{
+  position:absolute;
+  width:100%;
+  height:100%;
+  overflow:hidden;
+}
+
+.photo img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+</style>
+</head>
+<body>
+
+<div class="space">Scroll Down</div>
+
+<div class="gallery">
+  <div class="left">
+    <div class="details">
+      <h1>Modern Living Room</h1>
+      <p>Clean and elegant interior design with natural lighting.</p>
+    </div>
+
+    <div class="details">
+      <h1>Luxury Bedroom</h1>
+      <p>Comfort meets simplicity with soft tones and textures.</p>
+    </div>
+
+    <div class="details">
+      <h1>Creative Workspace</h1>
+      <p>Minimal desk setup focused on productivity and creativity.</p>
+    </div>
+
+    <div class="details">
+      <h1>Stylish Kitchen</h1>
+      <p>Modern kitchen space with premium materials and lighting.</p>
+    </div>
+  </div>
+
+  <div class="right">
+    <div class="photo">
+      <img src="https://images.unsplash.com/photo-1507089947368-19c1da9775ae" />
+    </div>
+    <div class="photo">
+      <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85" />
+    </div>
+    <div class="photo">
+      <img src="https://images.unsplash.com/photo-1492724441997-5dc865305da7" />
+    </div>
+    <div class="photo">
+      <img src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f" />
+    </div>
+  </div>
+</div>
+
+<div class="space">End Section</div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"></script>
+
+<script>
+gsap.registerPlugin(ScrollTrigger);
+
+let details = gsap.utils.toArray(".details");
+let photos = gsap.utils.toArray(".photo");
+
+// Initial states
+gsap.set(details, { opacity: 0 });
+gsap.set(details[0], { opacity: 1 });
+
+gsap.set(photos.slice(1), { opacity: 0, y: 100 });
+
+// Dynamic scroll length
+let totalSections = details.length;
+
+let tl = gsap.timeline({
+  scrollTrigger: {
+    trigger: ".gallery",
+    start: "top top",
+    end: () => "+=" + (window.innerHeight * totalSections),
+    scrub: true,
+    pin: true,
+    anticipatePin: 1
+  }
+});
+
+// Animation
+details.forEach((detail, i) => {
+
+  if (i !== 0) {
+    tl.to(details[i - 1], {
+      opacity: 0,
+      duration: 1
+    });
+  }
+
+  tl.to(detail, {
+    opacity: 1,
+    duration: 1
+  }, "<");
+
+  if (i !== 0) {
+    tl.to(photos[i], {
+      opacity: 1,
+      y: 0,
+      duration: 1
+    }, "<");
+  }
+});
+
+</script>
+
+</body>
+</html>
